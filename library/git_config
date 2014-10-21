@@ -1,0 +1,76 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+DOCUMENTATION = '''
+---
+module: git_config
+short_description: Manage atom packages with apm
+description:
+  - Manage atom packages with Atom Package Manager (apm)
+version_added: 1.6
+author: Hiroaki Nakamura
+options:
+  name:
+    description:
+      - The name of a atom library to install
+    required: true
+  version:
+    description:
+      - The version to be installed
+    required: false
+  executable:
+    description:
+      - The executable location for apm.
+      - This is useful if apm is not in the PATH.
+    required: false
+  state:
+    description:
+      - The state of the atom library
+    required: false
+    default: present
+    choices: [ "present", "absent", "latest" ]
+'''
+
+EXAMPLES = '''
+description: Install "project-manager" atom package.
+- apm: name=project-manager state=present
+
+description: Update the package "project-manager" to the latest version.
+- npm: name=project-manager state=latest
+
+description: Remove the package "project-manager".
+- npm: name=project-manager state=absent
+'''
+
+import os
+import subprocess
+from ansible.module_utils.basic import *
+
+
+def main():
+    arg_spec = dict(
+        name=dict(default=None),
+        value=dict(default=None),
+    )
+    module = AnsibleModule(
+        argument_spec=arg_spec,
+        supports_check_mode=False
+    )
+
+    name = module.params['name']
+    value = module.params['value']
+
+    if not name:
+        module.fail_json(msg='name must be specified')
+
+    rc, out, err = module.run_command(['git', 'config', '--global', name])
+
+    if out.strip() == value.strip():
+      changed = False
+    else:
+      changed = True
+      module.run_command(['git', 'config' '--global', name, value])
+
+    module.exit_json(changed=changed)
+
+main()

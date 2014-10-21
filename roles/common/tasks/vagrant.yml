@@ -1,0 +1,4 @@
+---
+- name: Install vagrant
+  sudo: yes
+  apt: name=vagrant state=present

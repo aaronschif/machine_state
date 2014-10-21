@@ -1,0 +1,7 @@
+---
+- name: Main Machine State
+  hosts: localhost
+  user: root
+
+  roles:
+    - common

@@ -1,0 +1,19 @@
+---
+- name: Install nodejs
+  sudo: yes
+  apt: name=nodejs
+
+- name: Link node
+  sudo: yes
+  file: |
+    state=link
+    src=/usr/bin/nodejs
+    path=/usr/bin/node
+
+- name: Install npm
+  sudo: yes
+  apt: name=npm
+
+- name: Install gulp
+  sudo: yes
+  npm: name=gulp global=yes

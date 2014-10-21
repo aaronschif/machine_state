@@ -1,0 +1,19 @@
+---
+- name: Fetch bashrc
+  register: result
+  git: |
+    repo=git@github.com:aaronschif/bashrc.git
+    dest=/home/{{username}}/.bashrc.d/
+    accept_hostkey=yes
+
+- name: Build bashrc
+  command: python /home/{{username}}/.bashrc.d/compile.py main.sh
+  when: result|changed
+  args:
+    chdir: /home/{{username}}/.bashrc.d/scripts/
+    creates: bashrc.out
+
+- name: Install bashrc
+  copy: |
+    src=/home/{{username}}/.bashrc.d/scripts/bashrc.out
+    dest=/home/{{username}}/.bashrc

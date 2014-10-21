@@ -1,0 +1,29 @@
+---
+- name: Install git
+  sudo: yes
+  apt: name=git state=present
+
+- name: Add gitignore entries
+  lineinfile: |
+      dest=/home/{{username}}/.config/git/ignore
+      line="{{item}}"
+      create=yes
+  with_items:
+      - '/.python-version'
+      - '/.idea'
+
+- name: Configure git
+  git_config: |
+    name='{{item.name}}'
+    value='{{item.value}}'
+  with_items:
+    - name: user.name
+      value: Aaron Schif
+    - name: user.email
+      value: aaronschif@gmail.com
+    - name: core.editor
+      value: vim
+    - name: color.ui
+      value: 'true'
+    - name: push.default
+      value: simple

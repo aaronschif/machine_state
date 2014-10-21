@@ -1,0 +1,9 @@
+---
+- include: bashrc.yml
+- include: python.yml
+- include: vagrant.yml
+- include: vim.yml
+- include: git.yml
+- include: atom.yml
+- include: config.yml
+- include: node.yml

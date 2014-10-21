@@ -1,0 +1,13 @@
+---
+- name: Fetch atom repository
+  apt_repository: repo=ppa:webupd8team/atom
+
+- name: Install atom
+  apt: name=atom
+
+- name: Install atom packages
+  command: apm install {{item}}
+  args:
+    creates: /home/{{username}}/.atom/packages/{{item}}
+  with_items:
+    - file-icons
