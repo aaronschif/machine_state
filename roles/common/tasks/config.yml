@@ -24,3 +24,13 @@
   gsetting: |
     key="com.canonical.indicator.keyboard.visible"
     value=false
+
+- name: Set time format to custom
+  gsetting: |
+    key="com.canonical.indicator.datetime.time-format"
+    value='custom'
+
+- name: Set custom time format
+  gsetting: |
+    key=com.canonical.indicator.datetime.custom-time-format
+    value='%R | %e %b'
