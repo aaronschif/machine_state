@@ -19,3 +19,8 @@
   gsetting: |
     key="com.canonical.Unity.Lenses.remote-content-search"
     value="'none'"
+
+- name: Hide keyboard type
+  gsetting: |
+    key="com.canonical.indicator.keyboard.visible"
+    value=false
