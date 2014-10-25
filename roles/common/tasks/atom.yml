@@ -1,9 +1,11 @@
 ---
 - name: Fetch atom repository
   apt_repository: repo=ppa:webupd8team/atom
+  sudo: true
 
 - name: Install atom
   apt: name=atom
+  sudo: true
 
 - name: Install atom packages
   command: apm install {{item}}

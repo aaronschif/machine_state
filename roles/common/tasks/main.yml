@@ -7,3 +7,4 @@
 - include: atom.yml
 - include: config.yml
 - include: node.yml
+- include: guake.yml

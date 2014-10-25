@@ -1,0 +1,15 @@
+---
+- name: Create kodi user
+  register: kodi_user
+  sudo: true
+  user: |
+    name=kodi
+
+- name: Kodi repo
+  sudo: true
+  apt_repository: repo=ppa:team-xbmc/ppa
+
+- name: Install Kodi
+  sudo: true
+  apt: |
+    name=xbmc

@@ -1,0 +1,4 @@
+---
+- name: Install guake
+  sudo: true
+  apt: name=guake state=present
