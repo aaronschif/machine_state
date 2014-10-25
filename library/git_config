@@ -69,7 +69,7 @@ def main():
       changed = False
     else:
       changed = True
-      module.run_command(['git', 'config' '--global', name, value])
+      module.run_command(['git', 'config', '--global', name, value])
 
     module.exit_json(changed=changed)
 
