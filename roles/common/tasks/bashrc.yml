@@ -15,5 +15,5 @@
 
 - name: Install bashrc
   copy: |
-    src=/home/{{username}}/.bashrc.d/scripts/bashrc.out
+    src=/home/{{username}}/.bashrc.d/bashrc.out
     dest=/home/{{username}}/.bashrc
