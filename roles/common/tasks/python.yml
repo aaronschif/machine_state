@@ -11,7 +11,9 @@
   args:
     creates: /home/{{username}}/.pyenv/
 
-- name: Install pyenv virtualenv
-  git: |
-    repo=git@github.com:yyuu/pyenv-virtualenv.git
-    dest=/home/{{username}}/.pyenv/plugins/pyenv-virtualenv
+- name: Dev packages
+  sudo:  yes
+  apt: name={{item}}
+  with_items:
+    - libxml2-dev
+    - libxslt1-dev

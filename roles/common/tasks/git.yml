@@ -11,6 +11,7 @@
   with_items:
       - '/.python-version'
       - '/.idea'
+      - '*~'
 
 - name: Configure git
   git_config: |
