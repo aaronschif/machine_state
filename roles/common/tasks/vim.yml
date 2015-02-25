@@ -2,3 +2,29 @@
 - name: Install vim
   sudo: yes
   apt: name=vim
+
+- file: path={{item}} state=directory
+  with_items:
+    - /home/{{username}}/.vim/autoload/
+    - /home/{{username}}/.vim/bundle/
+
+- name: Fetch pathogen
+  command: curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+  args:
+    creates: /home/{{username}}/.vim/autoload/pathogen.vim
+
+- name: Create vimrc
+  template: |
+    src=roles/common/files/vimrc.vim
+    dest=/home/{{username}}/.vimrc
+
+- name: Fetch addons
+  git: |
+   repo={{item.repo}}
+   dest=/home/{{username}}/.vim/bundle/{{item.name}}
+   accept_hostkey=yes
+  with_items:
+    - name: sensible
+      repo: git://github.com/tpope/vim-sensible.git
+    - name: markdown
+      repo: git://github.com/plasticboy/vim-markdown.git
