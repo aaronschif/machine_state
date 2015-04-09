@@ -7,10 +7,10 @@
     accept_hostkey=yes
 
 - name: Build bashrc
-  command: python /home/{{username}}/.bashrc.d/compile.py main.sh
+  command: python /home/{{username}}/.bashrc.d/compile.py
   when: result|changed
   args:
-    chdir: /home/{{username}}/.bashrc.d/scripts/
+    chdir: /home/{{username}}/.bashrc.d/
     creates: bashrc.out
 
 - name: Install bashrc
